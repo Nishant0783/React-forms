@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from "react";
 import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from 'react'
 import axios from '../api/axios';
+import { Link } from "react-router-dom";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -16,7 +16,7 @@ const Register = () => {
     const [validName, setValidName] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
 
-    const [pwd, setPwd] = useState('')
+    const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
     const [pwdFocus, setPwdFocus] = useState(false);
 
@@ -27,23 +27,19 @@ const Register = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
-    // focus on user input box on component load
     useEffect(() => {
         userRef.current.focus();
     }, [])
 
-    // checks whether user matches the regex
     useEffect(() => {
         setValidName(USER_REGEX.test(user));
     }, [user])
 
-    // checks whether password mathches the regex and password and confirm password are same or not
     useEffect(() => {
         setValidPwd(PWD_REGEX.test(pwd));
         setValidMatch(pwd === matchPwd);
     }, [pwd, matchPwd])
 
-    // set err msg to empty string when any of input field is changed as user has read error message and now he is adjusting to changes.
     useEffect(() => {
         setErrMsg('');
     }, [user, pwd, matchPwd])
@@ -54,7 +50,7 @@ const Register = () => {
         const v1 = USER_REGEX.test(user);
         const v2 = PWD_REGEX.test(pwd);
         if (!v1 || !v2) {
-            setErrMsg("Inavlid Entry")
+            setErrMsg("Invalid Entry");
             return;
         }
         try {
@@ -65,12 +61,11 @@ const Register = () => {
                     withCredentials: true
                 }
             );
-            console.log(response?.data);
-            console.log(response?.accessToken);
-            console.log(JSON.stringify(response))
+            // TODO: remove console.logs before deployment
+            console.log(JSON.stringify(response?.data));
+            //console.log(JSON.stringify(response))
             setSuccess(true);
             //clear state and controlled inputs
-            //need value attrib on inputs for this
             setUser('');
             setPwd('');
             setMatchPwd('');
@@ -176,8 +171,7 @@ const Register = () => {
                     <p>
                         Already registered?<br />
                         <span className="line">
-                            {/*put router link here*/}
-                            <a href="#">Sign In</a>
+                            <Link to="/">Sign In</Link>
                         </span>
                     </p>
                 </section>

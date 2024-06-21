@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom"
-import Users from "./Users"
+import { Link } from "react-router-dom";
+import Users from './Users';
 
 const Admin = () => {
     return (
@@ -8,7 +8,6 @@ const Admin = () => {
             <br />
             <Users />
             <br />
-            <p>You must have been assigned an Admin role.</p>
             <div className="flexGrow">
                 <Link to="/">Home</Link>
             </div>

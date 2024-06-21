@@ -10,6 +10,6 @@ const useToggle = (key, initValue) => {
     }
 
     return [value, toggle];
-} 
+}
 
-export default useToggle;
+export default useToggle

@@ -4,18 +4,18 @@ import useAuth from "./useAuth";
 const useLogout = () => {
     const { setAuth } = useAuth();
 
-    const logout = async() => {
+    const logout = async () => {
         setAuth({});
         try {
             const response = await axios('/logout', {
                 withCredentials: true
             });
-        } catch (error) {
-            console.error(err)
+        } catch (err) {
+            console.error(err);
         }
     }
 
     return logout;
 }
 
-export default useLogout;
+export default useLogout
